@@ -24,8 +24,11 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	// LangChain4j implementar ia openia
-	implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.11.0-beta19'
-	implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.11.0-beta19'
+	implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.0.0-beta1'
+	implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.0.0-beta1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  	runtimeOnly 'org.postgresql:postgresql'
 
 }
 

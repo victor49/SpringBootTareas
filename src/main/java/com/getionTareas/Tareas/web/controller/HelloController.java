@@ -1,6 +1,7 @@
-package com.getionTareas.Tareas;
+package com.getionTareas.Tareas.web.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import com.getionTareas.Tareas.domain.TareaAiService;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -14,9 +15,9 @@ public class HelloController {
         this.aiService = aiService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String hello() {
-        //return this.aiService.generarMensaje(); utilizar IA para generar el mesaje 
+        //return this.aiService.generarMensaje(); //utilizar IA para generar el mesaje 
         return "Hello";
     }
     

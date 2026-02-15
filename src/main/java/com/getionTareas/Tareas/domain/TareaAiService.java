@@ -1,4 +1,4 @@
-package com.getionTareas.Tareas;
+package com.getionTareas.Tareas.domain;
 
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.spring.AiService;
