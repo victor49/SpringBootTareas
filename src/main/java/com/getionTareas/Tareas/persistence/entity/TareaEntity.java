@@ -1,4 +1,4 @@
-package com.getionTareas.Tareas.domain.entity;
+package com.getionTareas.Tareas.persistence.entity;
 
 import java.time.LocalDate;
 
