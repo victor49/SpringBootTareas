@@ -1,5 +1,12 @@
 package com.getionTareas.Tareas.domain.dto;
 
-public record TareaDto() {
+import java.time.LocalDate;
+
+public record TareaDto(
+    String title,
+    String description,
+    Boolean estat,
+    LocalDate termin
+) {
 
 }

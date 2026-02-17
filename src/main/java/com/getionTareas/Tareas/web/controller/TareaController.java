@@ -3,24 +3,22 @@ package com.getionTareas.Tareas.web.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.getionTareas.Tareas.domain.dto.TareaDto;
-import com.getionTareas.Tareas.domain.service.TareaAiService;
-import com.getionTareas.Tareas.persistence.crud.CrudTareaEntity;
-import com.getionTareas.Tareas.persistence.entity.TareaEntity;
+import com.getionTareas.Tareas.domain.service.TareaService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
 public class TareaController {
-    private final TareaAiService TareaService;
+    private final TareaService tareaService;
 
-    public TareaController(TareaAiService tareaService) {
-        TareaService = tareaService;
+    public TareaController(TareaService tareaService) {
+        this.tareaService = tareaService;
     }
 
     @GetMapping()
     public List<TareaDto> getAll() {
-        return this.TareaService.getAll();
+        return this.tareaService.getAll();
     }
     
 
