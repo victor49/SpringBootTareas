@@ -6,5 +6,6 @@ import com.getionTareas.Tareas.domain.dto.TareaDto;
 
 public interface TareaRepository {
     List<TareaDto> getAll(); 
+    TareaDto getById(Integer id);
 
 }

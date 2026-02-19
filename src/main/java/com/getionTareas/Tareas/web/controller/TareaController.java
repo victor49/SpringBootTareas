@@ -6,6 +6,9 @@ import com.getionTareas.Tareas.domain.dto.TareaDto;
 import com.getionTareas.Tareas.domain.service.TareaService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 @RestController
@@ -22,7 +25,12 @@ public class TareaController {
     }
     
 
-
+    @GetMapping("/{id}")
+    public TareaDto getById(@PathVariable Integer id)
+    {
+        return this.tareaService.getById(id);
+    }
+    
 
 
 }

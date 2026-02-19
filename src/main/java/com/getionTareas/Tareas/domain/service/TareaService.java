@@ -20,6 +20,9 @@ public class TareaService {
         return this.tareaRepository.getAll();
     }
 
-    
+    public TareaDto getById(Integer id)
+    {
+        return this.tareaRepository.getById(id);
+    }
 
 }

@@ -19,8 +19,8 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        //return this.aiService.generarMensaje(); //utilizar IA para generar el mesaje 
-        return "Hello";
+        return this.aiService.generarMensaje(); //utilizar IA para generar el mesaje 
+        //return "Hello";
     }
     
 
