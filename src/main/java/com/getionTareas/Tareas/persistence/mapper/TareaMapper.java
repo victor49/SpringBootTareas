@@ -5,9 +5,11 @@ import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import com.getionTareas.Tareas.domain.dto.TareaDto;
 import com.getionTareas.Tareas.domain.dto.TareaInsertDto;
+import com.getionTareas.Tareas.domain.dto.TareaUpdateDto;
 import com.getionTareas.Tareas.persistence.entity.TareaEntity;
 
 @Mapper(componentModel = "spring", uses = {EstodoMapper.class})
@@ -33,10 +35,24 @@ public interface TareaMapper {
     TareaEntity toEntity(TareaDto tareaDto);
     */
 
-    //Convertir InsertDto a entity
+    //   Convertir InsertDto a entity
     @Mapping(source = "title", target = "titulo")
     @Mapping(source = "description", target = "descripcion")
     @Mapping(source = "estat", target = "estado", qualifiedByName = "estodoToBoolena")
     @Mapping(source = "termin", target = "fechaLimite")
-    TareaEntity toEntity(TareaInsertDto tareaInsertDto);
+    TareaEntity toInserDtoEntity(TareaInsertDto tareaInsertDto);
+
+
+    //   Convertir UnpdateDto a entity
+    @Mapping(target = "descripcion", source = "description")
+    @Mapping(source = "estat", target = "estado", qualifiedByName = "estodoToBoolena")
+    void updateEntityFromDto(TareaUpdateDto tareaUpdateDto, @MappingTarget TareaEntity tareaEntity);
+
+
+
+
+
+
+
+
 }
