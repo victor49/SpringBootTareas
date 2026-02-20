@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.getionTareas.Tareas.domain.dto.TareaDto;
+import com.getionTareas.Tareas.domain.dto.TareaInsertDto;
 import com.getionTareas.Tareas.domain.repository.TareaRepository;
 
 @Service
@@ -23,6 +24,11 @@ public class TareaService {
     public TareaDto getById(Integer id)
     {
         return this.tareaRepository.getById(id);
+    }
+
+    public TareaDto add(TareaInsertDto tareaInsertDto)
+    {
+        return this.tareaRepository.save(tareaInsertDto);
     }
 
 }

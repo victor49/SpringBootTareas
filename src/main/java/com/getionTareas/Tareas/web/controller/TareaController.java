@@ -3,15 +3,24 @@ package com.getionTareas.Tareas.web.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.getionTareas.Tareas.domain.dto.TareaDto;
+import com.getionTareas.Tareas.domain.dto.TareaInsertDto;
 import com.getionTareas.Tareas.domain.service.TareaService;
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 
 
 @RestController
+@RequestMapping("/tareas")
 public class TareaController {
     private final TareaService tareaService;
 
@@ -20,17 +29,30 @@ public class TareaController {
     }
 
     @GetMapping()
-    public List<TareaDto> getAll() {
-        return this.tareaService.getAll();
+    public ResponseEntity<List<TareaDto>> getAll() {
+        
+        return ResponseEntity.ok(this.tareaService.getAll());
+ 
     }
     
 
     @GetMapping("/{id}")
-    public TareaDto getById(@PathVariable Integer id)
+    public ResponseEntity<TareaDto> getById(@PathVariable Integer id)
     {
-        return this.tareaService.getById(id);
+        TareaDto tareaDto = this.tareaService.getById(id);
+
+        if (tareaDto == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(tareaDto);
+    }
+
+    
+    @PostMapping()
+    public ResponseEntity<TareaDto> add(@RequestBody TareaInsertDto tareaInsertDto) {        
+        TareaDto tareaDto = this.tareaService.add(tareaInsertDto);               
+        return ResponseEntity.status(HttpStatus.CREATED).body(tareaDto);
     }
     
-
 
 }

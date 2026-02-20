@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.getionTareas.Tareas.domain.dto.TareaDto;
+import com.getionTareas.Tareas.domain.dto.TareaInsertDto;
 import com.getionTareas.Tareas.domain.repository.TareaRepository;
 import com.getionTareas.Tareas.persistence.crud.CrudTareaEntity;
 import com.getionTareas.Tareas.persistence.entity.TareaEntity;
@@ -29,6 +30,13 @@ public class TareaEntityRepository implements TareaRepository{
     public TareaDto getById(Integer id) {
         TareaEntity tareaEntity = this.crudTareaEntity.findById(id).orElse(null);
         return this.tareaMapper.toDto(tareaEntity);
+    }
+
+    @Override
+    public TareaDto save(TareaInsertDto tareaInsertDto) {
+        TareaEntity tareaEntity = this.tareaMapper.toEntity(tareaInsertDto);
+
+        return this.tareaMapper.toDto(this.crudTareaEntity.save(tareaEntity));
     }
 
 }
