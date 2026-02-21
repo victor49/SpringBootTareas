@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.getionTareas.Tareas.domain.dto.TareaDto;
 import com.getionTareas.Tareas.domain.dto.TareaInsertDto;
 import com.getionTareas.Tareas.domain.dto.TareaUpdateDto;
+import com.getionTareas.Tareas.domain.exception.TareaExisteException;
 import com.getionTareas.Tareas.domain.repository.TareaRepository;
 import com.getionTareas.Tareas.persistence.crud.CrudTareaEntity;
 import com.getionTareas.Tareas.persistence.entity.TareaEntity;
@@ -30,6 +31,10 @@ public class TareaEntityRepository implements TareaRepository{
     @Override
     public TareaDto getById(Integer id) {
         TareaEntity tareaEntity = this.crudTareaEntity.findById(id).orElse(null);
+
+        if (tareaEntity == null)
+            throw new TareaExisteException();
+
         return this.tareaMapper.toDto(tareaEntity);
     }
 
@@ -45,7 +50,7 @@ public class TareaEntityRepository implements TareaRepository{
         TareaEntity tareaEntity = this.crudTareaEntity.findById(id).orElse(null);
 
         if (tareaEntity == null)
-            return null;
+            throw new TareaExisteException();
 
         this.tareaMapper.updateEntityFromDto(tareaUpdateDto, tareaEntity);
 
@@ -53,8 +58,13 @@ public class TareaEntityRepository implements TareaRepository{
     }
 
     @Override
-    public TareaDto delete(Integer id) {
+    public TareaDto delete(Integer id) {       
+
         TareaEntity tareaEntity = this.crudTareaEntity.findById(id).orElse(null);
+
+        if (tareaEntity == null)
+            throw new TareaExisteException();
+
         this.crudTareaEntity.delete(tareaEntity);
         return this.tareaMapper.toDto(tareaEntity);
     }
