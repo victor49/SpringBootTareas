@@ -6,6 +6,10 @@ import com.getionTareas.Tareas.domain.dto.TareaDto;
 import com.getionTareas.Tareas.domain.dto.TareaInsertDto;
 import com.getionTareas.Tareas.domain.dto.TareaUpdateDto;
 import com.getionTareas.Tareas.domain.service.TareaService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/tareas")
+@Tag(name = "Tareas", description = "Operaciones de las Tareas") //Nombre del controlador en el swagger
 public class TareaController {
     private final TareaService tareaService;
 
@@ -53,13 +58,13 @@ public class TareaController {
 
     
     @PostMapping()
-    public ResponseEntity<TareaDto> add(@RequestBody TareaInsertDto tareaInsertDto) {        
+    public ResponseEntity<TareaDto> add(@RequestBody @Valid TareaInsertDto tareaInsertDto) {        
         TareaDto tareaDto = this.tareaService.add(tareaInsertDto);               
         return ResponseEntity.status(HttpStatus.CREATED).body(tareaDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TareaDto> update(@PathVariable Integer id, @RequestBody TareaUpdateDto tareaUpdateDto) {        
+    public ResponseEntity<TareaDto> update(@PathVariable Integer id, @Valid @RequestBody TareaUpdateDto tareaUpdateDto) {        
         return ResponseEntity.ok(this.tareaService.update(id, tareaUpdateDto));
     }
     
